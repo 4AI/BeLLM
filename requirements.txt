@@ -1,2 +1,2 @@
-angle-emb
+angle-emb==3.1.0
 billm==0.1.3
