@@ -78,7 +78,7 @@ BiLLM_START_INDEX=31 WANDB_MODE=disabled CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun -
 
 **Tips:**
 
-- Here we only use contrastive learning loss (ibn_w = 1.0, cosine_w = 0.0, angle_w = 0.0). It is recommended to use AnglE (set `angle_w` > 0) to further improve the performance.
+- Here we only use contrastive learning loss (ibn_w = 1.0, cosine_w = 0.0, angle_w = 0.0). **It is recommended to use AnglE (set `angle_w` > 0) to further improve the performance.**
 - `BiLLM_START_INDEX=31` is used to set layers greater than 31 to be bidirectional. Since the LLaMA-7B has 32 layers, thus `BiLLM_START_INDEX=31` will convert the final layer bidirectional.
 
 
