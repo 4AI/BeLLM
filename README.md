@@ -61,7 +61,7 @@ If you want to push the model to HuggingFace automatically, you can add followin
 --hub_private_repo 1
 ```
 
-2) continue to pretrain on augmented data:
+2) continue to finetune on augmented data:
 
 ```bash
 BiLLM_START_INDEX=31 WANDB_MODE=disabled CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master_port=1234 train.py \
