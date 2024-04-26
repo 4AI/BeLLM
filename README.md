@@ -69,10 +69,10 @@ BiLLM_START_INDEX=31 WANDB_MODE=disabled CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun -
 --pretrained_lora_path ckpts/bellm-llama-7b-nli \
 --save_dir ckpts/bellm-llama-7b-nli-2 \
 --model_name NousResearch/Llama-2-7b-hf \
---ibn_w 1.0 --cosine_w 0.0 --angle_w 0.0 --learning_rate 5e-4 --maxlen 60 \
+--ibn_w 1.0 --cosine_w 0.0 --angle_w 0.0 --learning_rate 2e-4 --maxlen 60 \
 --is_llm 1 --apply_lora 1 --lora_r 32 --lora_alpha 32 --lora_dropout 0.1 \
 --push_to_hub 0 \
---save_steps 200 --batch_size 256 --seed 42 --load_kbit 4 --gradient_accumulation_steps 4 --epochs 1 --fp16 1
+--save_steps 200 --batch_size 256 --seed 42 --load_kbit 4 --gradient_accumulation_steps 64 --epochs 1 --fp16 1
 ```
 
 
