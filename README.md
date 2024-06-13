@@ -42,15 +42,20 @@ We have pushed the processed train set to huggingface:
 ### 3. Training
 
 1) 
+
 ```bash
 BiLLM_START_INDEX=31 WANDB_MODE=disabled CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nproc_per_node=4 --master_port=1234 train.py \
 --train_name_or_path SeanLee97/all_nli_angle_format_b \
 --save_dir ckpts/bellm-llama-7b-nli \
---model_name NousResearch/Llama-2-7b-hf \
---ibn_w 1.0 --cosine_w 0.0 --angle_w 0.0 --learning_rate 5e-4 --maxlen 60 \
---is_llm 1 --apply_lora 1 --lora_r 32 --lora_alpha 32 --lora_dropout 0.1 \
+--model_name NousResearch/Llama-2-7b-chat-hf \
+--prompt_template 'The representative word for sentence {text} is:"' \
+--pooling_strategy avg \
+--ibn_w 20.0 --cosine_w 0.0 --angle_w 1.0 --learning_rate 2e-4 --maxlen 60 \
+--apply_lora 1 --lora_r 64 --lora_alpha 128 --lora_dropout 0.1 \
+--is_llm 1 --apply_billm 1 --billm_model_class LlamaForCausalLM \
 --push_to_hub 0 \
---save_steps 200 --batch_size 256 --seed 42 --load_kbit 4 --gradient_accumulation_steps 4 --epochs 1 --fp16 1
+--logging_steps 5 --save_steps 50 --warmup_steps 80 --batch_size 256 --seed 42 --load_kbit 4 \
+--gradient_accumulation_steps 32 --epochs 3 --fp16 1
 ```
 
 If you want to push the model to HuggingFace automatically, you can add following extra arguments:
@@ -72,7 +77,7 @@ BiLLM_START_INDEX=31 WANDB_MODE=disabled CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun -
 --ibn_w 1.0 --cosine_w 0.0 --angle_w 0.0 --learning_rate 2e-4 --maxlen 60 \
 --is_llm 1 --apply_lora 1 --lora_r 32 --lora_alpha 32 --lora_dropout 0.1 \
 --push_to_hub 0 \
---save_steps 200 --batch_size 256 --seed 42 --load_kbit 4 --gradient_accumulation_steps 64 --epochs 1 --fp16 1
+--save_steps 200 --batch_size 256 --seed 42 --load_kbit 4 --gradient_accumulation_steps 32 --epochs 3 --fp16 1
 ```
 
 
